@@ -48,7 +48,13 @@ AutoModpack supports a wide range of Minecraft versions and mod loaders:
 *   **Minecraft 1.20.1** - Fabric, Forge
 *   **Minecraft 1.20.4** - Fabric, NeoForge
 *   **Minecraft 1.20.6** - Fabric, NeoForge
-*   **Minecraft 1.21.x** - Fabric, NeoForge (1.21.1, 1.21.3, 1.21.4, 1.21.5, 1.21.8, 1.21.10, 1.21.11)
+*   **Minecraft 1.21.1** - Fabric, NeoForge
+*   **Minecraft 1.21.3** - Fabric, NeoForge
+*   **Minecraft 1.21.4** - Fabric, NeoForge
+*   **Minecraft 1.21.5** - Fabric, NeoForge
+*   **Minecraft 1.21.8** - Fabric, NeoForge
+*   **Minecraft 1.21.10** - Fabric, NeoForge
+*   **Minecraft 1.21.11** - Fabric, NeoForge
 
 Download the version that matches your Minecraft installation from the [releases page](https://github.com/Skidamek/AutoModpack/releases).
 
