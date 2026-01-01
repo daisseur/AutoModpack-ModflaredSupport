@@ -109,3 +109,5 @@ AutoModpack wouldn't be where it is without the amazing community!
 We love contributions! Whether it's code, bug reports, documentation improvements, or just spreading the word, your help is welcome.
 
 **Ready to contribute? See our [CONTRIBUTING.md](CONTRIBUTING.md) for details!**
+
+**Want to build from source? Check out [BUILD.md](BUILD.md) for build and testing instructions!**
