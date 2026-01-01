@@ -38,6 +38,26 @@ This isn't just another mod; it's a game-changer for private servers. Here's why
 *   ⚡️ **Direct & Respectful Downloads:** The mod pulls directly from Modrinth and CurseForge APIs, so mod authors get credit for every download.
 *   🔒 **Secure & Speed:** Encrypted, authorized, compressed, quick modpack downloads.
 
+## 🎮 Supported Minecraft Versions
+
+AutoModpack supports a wide range of Minecraft versions and mod loaders:
+
+*   **Minecraft 1.18.2** - Fabric, Forge
+*   **Minecraft 1.19.2** - Fabric, Forge
+*   **Minecraft 1.19.4** - Fabric, Forge
+*   **Minecraft 1.20.1** - Fabric, Forge
+*   **Minecraft 1.20.4** - Fabric, NeoForge
+*   **Minecraft 1.20.6** - Fabric, NeoForge
+*   **Minecraft 1.21.1** - Fabric, NeoForge
+*   **Minecraft 1.21.3** - Fabric, NeoForge
+*   **Minecraft 1.21.4** - Fabric, NeoForge
+*   **Minecraft 1.21.5** - Fabric, NeoForge
+*   **Minecraft 1.21.8** - Fabric, NeoForge
+*   **Minecraft 1.21.10** - Fabric, NeoForge
+*   **Minecraft 1.21.11** - Fabric, NeoForge
+
+Download the version that matches your Minecraft installation from the [releases page](https://github.com/Skidamek/AutoModpack/releases).
+
 ## 🛠️ How the Magic Happens
 
 AutoModpack works by generating a modpack (**metadata file**) on the server, which contains all the files of your modpack. The server then hosts this file and the modpack files.
