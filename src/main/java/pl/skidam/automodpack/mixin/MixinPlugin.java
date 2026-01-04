@@ -8,10 +8,20 @@ import java.util.List;
 import java.util.Set;
 
 public class MixinPlugin implements IMixinConfigPlugin {
+    private boolean isFabric = false;
+    
     @Override
     public void onLoad(String mixinPackage) {
         // Needed for versions < 1.18
 //        MixinExtrasBootstrap.init();
+        
+        // Detect if we're running on Fabric by checking for Fabric Loader class
+        try {
+            Class.forName("net.fabricmc.loader.api.FabricLoader");
+            isFabric = true;
+        } catch (ClassNotFoundException e) {
+            isFabric = false;
+        }
     }
 
     @Override
@@ -21,6 +31,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        // Skip Fabric-specific mixins when not running on Fabric
+        if (mixinClassName.contains("FabricLoginMixin") && !isFabric) {
+            return false;
+        }
+        
         return true;
     }
 
