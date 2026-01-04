@@ -156,6 +156,14 @@ public class ModpackUpdater {
         LOGGER.info("Modpack is already loaded");
     }
 
+    private void handleDownloadClientFailure(String context) {
+        String errorMsg = String.format("Failed to connect to modpack host at %s%s. Please check your connection and try again.",
+                modpackAddresses.hostAddress,
+                context.isEmpty() ? "" : " " + context);
+        LOGGER.error(errorMsg);
+        new ScreenManager().error("automodpack.error.connection", errorMsg, "automodpack.error.logs");
+    }
+
     // TODO split it into different methods, its too long
     public void startUpdate(Set<Jsons.ModpackContentFields.ModpackContentItem> filesToUpdate) {
         if (modpackSecret == null) {
@@ -204,10 +212,7 @@ public class ModpackUpdater {
                 DownloadClient downloadClient = DownloadClient.tryCreate(modpackAddresses, modpackSecret.secretBytes(),
                         Math.min(wholeQueue, 5), ModpackUtils.userValidationCallback(modpackAddresses, false));
                 if (downloadClient == null) {
-                    String errorMsg = "Failed to connect to modpack host at " + modpackAddresses.hostAddress + 
-                                     ". Please check your connection and try again.";
-                    LOGGER.error(errorMsg);
-                    new ScreenManager().error("automodpack.error.connection", errorMsg, "automodpack.error.logs");
+                    handleDownloadClientFailure("");
                     return;
                 }
 
@@ -304,10 +309,7 @@ public class ModpackUpdater {
 
                         downloadClient = DownloadClient.tryCreate(modpackAddresses, modpackSecret.secretBytes(), Math.min(refreshedFilteredList.size(), 5), ModpackUtils.userValidationCallback(modpackAddresses, false));
                         if (downloadClient == null) {
-                            String errorMsg = "Failed to reconnect to modpack host at " + modpackAddresses.hostAddress + 
-                                             " for refreshed content. Please check your connection and try again.";
-                            LOGGER.error(errorMsg);
-                            new ScreenManager().error("automodpack.error.connection", errorMsg, "automodpack.error.logs");
+                            handleDownloadClientFailure("for refreshed content");
                             return;
                         }
                         downloadManager = new DownloadManager(totalBytesToDownload);
