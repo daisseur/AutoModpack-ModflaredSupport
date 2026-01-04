@@ -486,7 +486,7 @@ public class ModpackUtils {
         if (modpackAddresses.isAnyEmpty())
             throw new IllegalArgumentException("Modpack addresses are empty!");
 
-        try (DownloadClient client = DownloadClient.tryCreate(modpackAddresses, secret.secretBytes(), 1, userValidationCallback(modpackAddresses.hostAddress, allowAskingUser))) {
+        try (DownloadClient client = DownloadClient.tryCreate(modpackAddresses, secret.secretBytes(), 1, userValidationCallback(modpackAddresses, allowAskingUser))) {
             if (client == null) return Optional.empty();
             var future = operation.apply(client);
             Path path = future.get();
@@ -522,11 +522,16 @@ public class ModpackUtils {
      * Returns a callback for use with {@link DownloadClient} that checks for trusted fingerprints in the known hosts
      * list of the client config.
      *
-     * @param address         the address being connected to
+     * @param modpackAddresses the modpack addresses (host and server)
      * @param allowAskingUser whether the user should be prompted if a certificate is not trusted
      * @return the callback
      */
-    public static Function<X509Certificate, Boolean> userValidationCallback(InetSocketAddress address, boolean allowAskingUser) {
+    public static Function<X509Certificate, Boolean> userValidationCallback(Jsons.ModpackAddresses modpackAddresses, boolean allowAskingUser) {
+        // Use server address as the key for known hosts, as it remains constant even when using proxies/tunnels like Modflared
+        // The host address (modpack host) may change, but the Minecraft server address the player connects to stays the same
+        String serverKey = modpackAddresses.serverAddress.getHostString() + ":" + modpackAddresses.serverAddress.getPort();
+        InetSocketAddress hostAddress = modpackAddresses.hostAddress;
+        
         return certificate -> {
             String fingerprint;
             try {
@@ -534,13 +539,13 @@ public class ModpackUtils {
             } catch (CertificateEncodingException e) {
                 return false;
             }
-            if (Objects.equals(knownHosts.hosts.get(address.getHostString()), fingerprint))
+            if (Objects.equals(knownHosts.hosts.get(serverKey), fingerprint))
                 return true;
-            LOGGER.warn("Received untrusted certificate from server {}!", address.getHostString());
+            LOGGER.warn("Received untrusted certificate from server {}!", hostAddress.getHostString());
             if (allowAskingUser) {
-                boolean trusted = askUserAboutCertificate(address, fingerprint);
+                boolean trusted = askUserAboutCertificate(hostAddress, fingerprint);
                 if (trusted) {
-                    knownHosts.hosts.put(address.getHostString(), fingerprint);
+                    knownHosts.hosts.put(serverKey, fingerprint);
                     ConfigTools.save(knownHostsFile, knownHosts);
                 }
                 return trusted;

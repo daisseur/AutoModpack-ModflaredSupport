@@ -1,12 +1,25 @@
-Most minecraft proxies won't work with AutoModpack due to early login stage packets. However Gate Lite is supported and works well with AutoModpack. Here is a list of known proxies and their compatibility:
+Most minecraft proxies won't work with AutoModpack due to early login stage packets. However Gate Lite is supported and works well with AutoModpack. Additionally, Modflared (Cloudflare tunnels) is now fully compatible. Here is a list of known proxies and their compatibility:
 
-| Proxy Name                                        | Compatibility | Notes       |
-|---------------------------------------------------|---------------|-------------|
-| [Gate Lite](https://gate.minekube.com/guide/lite) | ✅             | Supported   |
-| Gate                                              | ❌             | Unsupported |
-| Velocity                                          | ❌             | Unsupported |
-| Waterfall                                         | ❌             | Unsupported |
-| BungeeCord                                        | ❌             | Unsupported |
+| Proxy Name                                         | Compatibility | Notes       |
+|----------------------------------------------------|---------------|-------------|
+| [Gate Lite](https://gate.minekube.com/guide/lite)  | ✅             | Supported   |
+| [Modflared](https://github.com/cainthebest/modflared) | ✅         | Supported   |
+| Gate                                               | ❌             | Unsupported |
+| Velocity                                           | ❌             | Unsupported |
+| Waterfall                                          | ❌             | Unsupported |
+| BungeeCord                                         | ❌             | Unsupported |
+
+## Modflared (Cloudflare Tunnels)
+
+Modflared is a Cloudflare tunnel solution for Minecraft servers that provides DDoS protection. AutoModpack is fully compatible with Modflared as of this version. The mod now correctly identifies servers using the Minecraft server address rather than the tunnel address, which means:
+
+- ✅ Certificate verification only happens once per Minecraft server (not per tunnel)
+- ✅ Players won't be asked to re-verify the certificate when tunnel addresses change
+- ✅ All modpack updates work seamlessly through Modflared tunnels
+
+No special configuration is required - AutoModpack will automatically handle Modflared tunnels correctly.
+
+## Gate Lite Configuration
 
 When using Gate Lite, it's crucial to correctly configure `portToSend`. By default, clients attempt to connect to the modpack host using the same port they used to connect to your Minecraft server. However, when using a proxy like Gate, this port differs from your actual Minecraft server's port, preventing clients from connecting to download the modpack.
 
