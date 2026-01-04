@@ -1,12 +1,25 @@
-La plupart des proxys Minecraft ne fonctionneront pas avec AutoModpack en raison des paquets de la phase de connexion précoce. Cependant, Gate Lite est supporté et fonctionne bien avec AutoModpack. Voici une liste des proxys connus et de leur compatibilité :
+La plupart des proxys Minecraft ne fonctionneront pas avec AutoModpack en raison des paquets de la phase de connexion précoce. Cependant, Gate Lite est supporté et fonctionne bien avec AutoModpack. De plus, Modflared (tunnels Cloudflare) est maintenant entièrement compatible. Voici une liste des proxys connus et de leur compatibilité :
 
-| Nom du Proxy                                      | Compatibilité  | Notes         |
-|---------------------------------------------------|----------------|---------------|
-| [Gate Lite](https://gate.minekube.com/guide/lite) | ✅             | Supporté      |
-| Gate                                              | ❌             | Non supporté  |
-| Velocity                                          | ❌             | Non supporté  |
-| Waterfall                                         | ❌             | Non supporté  |
-| BungeeCord                                        | ❌             | Non supporté  |
+| Nom du Proxy                                       | Compatibilité  | Notes         |
+|----------------------------------------------------|----------------|---------------|
+| [Gate Lite](https://gate.minekube.com/guide/lite)  | ✅             | Supporté      |
+| [Modflared](https://github.com/cainthebest/modflared) | ✅          | Supporté      |
+| Gate                                               | ❌             | Non supporté  |
+| Velocity                                           | ❌             | Non supporté  |
+| Waterfall                                          | ❌             | Non supporté  |
+| BungeeCord                                         | ❌             | Non supporté  |
+
+## Modflared (Tunnels Cloudflare)
+
+Modflared est une solution de tunnel Cloudflare pour les serveurs Minecraft qui offre une protection DDoS. AutoModpack est entièrement compatible avec Modflared depuis cette version. Le mod identifie maintenant correctement les serveurs en utilisant l'adresse du serveur Minecraft plutôt que l'adresse du tunnel, ce qui signifie :
+
+- ✅ La vérification du certificat ne se fait qu'une seule fois par serveur Minecraft (pas par tunnel)
+- ✅ Les joueurs ne seront pas invités à re-vérifier le certificat lorsque les adresses de tunnel changent
+- ✅ Toutes les mises à jour de modpack fonctionnent de manière transparente à travers les tunnels Modflared
+
+Aucune configuration spéciale n'est requise - AutoModpack gérera automatiquement les tunnels Modflared correctement.
+
+## Configuration de Gate Lite
 
 Lorsque vous utilisez Gate Lite, il est crucial de configurer correctement `portToSend`. Par défaut, les clients tentent de se connecter à l'hôte du modpack en utilisant le même port que celui utilisé pour se connecter à votre serveur Minecraft. Cependant, lorsque vous utilisez un proxy comme Gate, ce port diffère du port réel de votre serveur Minecraft, empêchant les clients de se connecter pour télécharger le modpack.
 
