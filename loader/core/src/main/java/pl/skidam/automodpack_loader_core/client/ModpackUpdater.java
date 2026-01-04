@@ -204,6 +204,10 @@ public class ModpackUpdater {
                 DownloadClient downloadClient = DownloadClient.tryCreate(modpackAddresses, modpackSecret.secretBytes(),
                         Math.min(wholeQueue, 5), ModpackUtils.userValidationCallback(modpackAddresses, false));
                 if (downloadClient == null) {
+                    String errorMsg = "Failed to connect to modpack host at " + modpackAddresses.hostAddress + 
+                                     ". Please check your connection and try again.";
+                    LOGGER.error(errorMsg);
+                    new ScreenManager().error("automodpack.error.connection", errorMsg, "automodpack.error.logs");
                     return;
                 }
 
@@ -300,6 +304,10 @@ public class ModpackUpdater {
 
                         downloadClient = DownloadClient.tryCreate(modpackAddresses, modpackSecret.secretBytes(), Math.min(refreshedFilteredList.size(), 5), ModpackUtils.userValidationCallback(modpackAddresses, false));
                         if (downloadClient == null) {
+                            String errorMsg = "Failed to reconnect to modpack host at " + modpackAddresses.hostAddress + 
+                                             " for refreshed content. Please check your connection and try again.";
+                            LOGGER.error(errorMsg);
+                            new ScreenManager().error("automodpack.error.connection", errorMsg, "automodpack.error.logs");
                             return;
                         }
                         downloadManager = new DownloadManager(totalBytesToDownload);
