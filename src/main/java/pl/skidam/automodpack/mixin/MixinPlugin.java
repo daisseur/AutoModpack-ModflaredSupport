@@ -32,7 +32,8 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         // Skip Fabric-specific mixins when not running on Fabric
-        if (mixinClassName.endsWith(".FabricLoginMixin") && !isFabric) {
+        // These mixins target Fabric API classes that don't exist on Forge/NeoForge
+        if (mixinClassName.contains(".Fabric") && mixinClassName.endsWith("Mixin") && !isFabric) {
             return false;
         }
         
