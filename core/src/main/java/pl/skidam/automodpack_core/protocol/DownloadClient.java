@@ -170,8 +170,8 @@ public class DownloadClient implements AutoCloseable {
         try {
             return new DownloadClient(modpackAddresses, secretBytes, poolSize, trustedByUserCallback);
         } catch (IOException e) {
-            LOGGER.error("Failed to create download client: {}", e.getMessage());
-            LOGGER.debug(e);
+            LOGGER.error("Failed to create download client for {}: {}", modpackAddresses.hostAddress, e.getMessage());
+            LOGGER.debug("Full stack trace:", e);
             return null;
         }
     }
