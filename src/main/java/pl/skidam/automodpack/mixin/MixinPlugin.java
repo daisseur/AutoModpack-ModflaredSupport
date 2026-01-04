@@ -32,7 +32,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         // Skip Fabric-specific mixins when not running on Fabric
-        if (mixinClassName.contains("FabricLoginMixin") && !isFabric) {
+        if (mixinClassName.endsWith(".FabricLoginMixin") && !isFabric) {
             return false;
         }
         
