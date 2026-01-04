@@ -78,7 +78,7 @@ public class DataC2SPacket {
             Boolean needsDisconnecting = null;
             FriendlyByteBuf response = new FriendlyByteBuf(Unpooled.buffer());
 
-            Path modpackDir = ModpackUtils.getModpackPath(modpackAddress, modpackName);
+            Path modpackDir = ModpackUtils.getModpackPath(serverAddress, modpackName);
             Jsons.ModpackAddresses modpackAddresses = new Jsons.ModpackAddresses(modpackAddress, serverAddress, requiresMagic);
             var optionalServerModpackContent = ModpackUtils.requestServerModpackContent(modpackAddresses, secret, true);
 

@@ -444,9 +444,10 @@ public class ModpackUtils {
     }
 
     // Returns modpack name formatted for path or url if server doesn't provide modpack name
-    public static Path getModpackPath(InetSocketAddress address, String modpackName) {
+    // Uses server address to ensure consistency with certificate verification, even when using proxies like Modflared
+    public static Path getModpackPath(InetSocketAddress serverAddress, String modpackName) {
 
-        String strAddress = address.getHostString() + ":" + address.getPort();
+        String strAddress = serverAddress.getHostString() + ":" + serverAddress.getPort();
         String correctedName = strAddress;
 
         if (FileInspection.isInValidFileName(strAddress)) {
